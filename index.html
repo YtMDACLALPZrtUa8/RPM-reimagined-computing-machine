@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RPM Home Management | Professional Property Management in Texas</title>
+  <meta name="description" content="RPM Home Management delivers professional, reliable property management services across Texas. Trusted residential property management in Dallas and beyond." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary: hsl(24, 100%, 50%);
+      --primary-fg: #fff;
+      --bg: #fff;
+      --fg: #141414;
+      --secondary: hsl(0, 0%, 6%);
+      --secondary-fg: #fff;
+      --muted: hsl(0, 0%, 95%);
+      --muted-fg: hsl(0, 0%, 40%);
+      --accent-bg: hsl(24, 90%, 95%);
+      --border: hsl(0, 0%, 90%);
+      --charcoal: hsl(0, 0%, 12%);
+      --radius: 0.5rem;
+    }
+
+    body {
+      font-family: 'Open Sans', sans-serif;
+      color: var(--fg);
+      background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.6;
+    }
+
+    h1, h2, h3, h4, h5, h6 { font-family: 'Montserrat', sans-serif; }
+
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+    img { max-width: 100%; display: block; }
+
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
+
+    /* ── Navbar ── */
+    .navbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+      background: rgba(15,15,15,0.95); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--secondary);
+      height: 64px; display: flex; align-items: center;
+    }
+    .navbar .container { display: flex; align-items: center; justify-content: space-between; width: 100%; }
+    .navbar-brand { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.5rem; color: var(--primary); }
+    .navbar-brand span { color: var(--secondary-fg); font-weight: 600; font-size: 0.85rem; margin-left: 0.5rem; }
+    .nav-links { display: flex; gap: 1.5rem; }
+    .nav-links a { color: rgba(255,255,255,0.8); font-size: 0.875rem; font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--primary); }
+    .nav-cta { display: flex; align-items: center; gap: 0.75rem; }
+    .nav-cta .phone-link { color: var(--primary); font-size: 0.875rem; font-weight: 600; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.5rem 1.25rem; border-radius: var(--radius);
+      font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 0.875rem;
+      cursor: pointer; transition: all 0.2s; border: none;
+    }
+    .btn-primary { background: var(--primary); color: var(--primary-fg); }
+    .btn-primary:hover { filter: brightness(1.1); }
+    .btn-lg { padding: 0.75rem 1.75rem; font-size: 1rem; }
+    .btn-outline {
+      background: transparent; border: 1px solid rgba(255,255,255,0.3);
+      color: var(--secondary-fg);
+    }
+    .btn-outline:hover { background: rgba(255,255,255,0.1); }
+    .mobile-toggle { display: none; background: none; border: none; color: var(--secondary-fg); cursor: pointer; }
+    .mobile-menu { display: none; }
+
+    /* ── Hero ── */
+    .hero {
+      position: relative; min-height: 90vh; display: flex; align-items: center;
+      background: var(--secondary); overflow: hidden;
+    }
+    .hero-bg { position: absolute; inset: 0; }
+    .hero-bg img { width: 100%; height: 100%; object-fit: cover; }
+    .hero-bg .overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to right, rgba(15,15,15,0.95), rgba(15,15,15,0.8), rgba(15,15,15,0.4));
+    }
+    .hero .container { position: relative; z-index: 10; padding-top: 8rem; padding-bottom: 8rem; }
+    .hero-content { max-width: 640px; }
+    .hero-badge { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1.5rem; }
+    .hero-badge span { color: var(--primary); font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; }
+    .hero h1 { font-size: 3rem; font-weight: 800; color: #fff; line-height: 1.15; margin-bottom: 1.5rem; }
+    .hero h1 .highlight { color: var(--primary); }
+    .hero p.desc { color: rgba(255,255,255,0.7); font-size: 1.125rem; max-width: 500px; margin-bottom: 1rem; }
+    .hero p.availability { color: var(--primary); font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 2rem; }
+    .hero-buttons { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+    /* ── Section helpers ── */
+    .section { padding: 5rem 0; }
+    .section-label { color: var(--primary); font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; }
+    .section-title { font-size: 2rem; font-weight: 700; margin-top: 0.75rem; }
+    .section-desc { color: var(--muted-fg); margin-top: 1rem; max-width: 600px; margin-left: auto; margin-right: auto; }
+    .text-center { text-align: center; }
+
+    /* ── Services ── */
+    .services { background: var(--muted); }
+    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 3.5rem; }
+    .service-card {
+      background: #fff; border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 1.5rem; transition: all 0.3s;
+    }
+    .service-card:hover { border-color: rgba(255, 115, 0, 0.4); box-shadow: 0 10px 30px rgba(0,0,0,0.08); }
+    .service-icon {
+      width: 48px; height: 48px; border-radius: var(--radius);
+      background: var(--accent-bg); display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1rem; color: var(--primary); font-size: 1.5rem;
+    }
+    .service-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .service-card p { color: var(--muted-fg); font-size: 0.875rem; }
+
+    /* ── About ── */
+    .about { background: var(--bg); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+    .about-image { position: relative; }
+    .about-image img { border-radius: var(--radius); box-shadow: 0 20px 40px rgba(0,0,0,0.12); width: 100%; aspect-ratio: 1; object-fit: cover; }
+    .about-badge {
+      position: absolute; bottom: -1rem; right: -1rem;
+      background: var(--primary); border-radius: var(--radius); padding: 1rem;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    }
+    .about-badge p:first-child { color: var(--primary-fg); font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 1.5rem; }
+    .about-badge p:last-child { color: rgba(255,255,255,0.8); font-size: 0.8rem; }
+    .about-text .section-title { margin-bottom: 1.5rem; }
+    .about-text .highlight { color: var(--primary); }
+    .about-text p.body { color: var(--muted-fg); margin-bottom: 1rem; line-height: 1.7; }
+    .about-list { margin-top: 1.5rem; display: flex; flex-direction: column; gap: 0.75rem; }
+    .about-list li { display: flex; align-items: center; gap: 0.75rem; font-weight: 500; font-size: 0.875rem; }
+    .about-list li .check { color: var(--primary); font-size: 1.25rem; flex-shrink: 0; }
+
+    /* ── Locations ── */
+    .locations { background: var(--secondary); color: var(--secondary-fg); }
+    .locations .section-title .highlight { color: var(--primary); }
+    .locations .section-desc { color: rgba(255,255,255,0.6); }
+    .locations-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; max-width: 750px; margin: 3.5rem auto 0; }
+    .location-card {
+      display: flex; align-items: center; gap: 0.5rem;
+      border-radius: var(--radius); padding: 1rem; transition: all 0.2s;
+    }
+    .location-card.hq { background: var(--primary); color: var(--primary-fg); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+    .location-card:not(.hq) { background: var(--charcoal); }
+    .location-card:not(.hq):hover { background: hsl(0, 0%, 15%); }
+    .location-card .pin { font-size: 1.1rem; flex-shrink: 0; }
+    .location-card.hq .pin { color: var(--primary-fg); }
+    .location-card:not(.hq) .pin { color: var(--primary); }
+    .location-card .name { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 0.875rem; }
+    .location-card .hq-label { font-size: 0.75rem; opacity: 0.8; }
+
+    /* ── Careers ── */
+    .careers { background: var(--muted); }
+    .careers-icon {
+      width: 56px; height: 56px; border-radius: 50%;
+      background: rgba(255, 115, 0, 0.1); display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 1.5rem; color: var(--primary); font-size: 1.75rem;
+    }
+    .careers p.note { color: var(--muted-fg); font-size: 0.75rem; margin-top: 1rem; }
+
+    /* ── Contact ── */
+    .contact { background: var(--secondary); color: var(--secondary-fg); }
+    .contact .section-desc { color: rgba(255,255,255,0.6); }
+    .contact-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; max-width: 850px; margin: 3.5rem auto 0; }
+    .contact-card {
+      background: var(--charcoal); border-radius: var(--radius);
+      padding: 1.5rem; text-align: center;
+    }
+    .contact-card .icon { color: var(--primary); font-size: 2rem; margin-bottom: 0.75rem; }
+    .contact-card h3 { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 0.875rem; margin-bottom: 0.25rem; }
+    .contact-card p, .contact-card a { color: rgba(255,255,255,0.7); font-size: 0.875rem; }
+    .contact-card a:hover { color: var(--primary); }
+
+    /* ── Footer ── */
+    .footer {
+      background: var(--secondary); border-top: 1px solid var(--charcoal);
+      padding: 2rem 0; text-align: center;
+    }
+    .footer .brand { color: var(--primary); font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.25rem; margin-bottom: 0.5rem; }
+    .footer .copy { color: rgba(255,255,255,0.5); font-size: 0.8rem; }
+
+    /* ── SVG icons (inline) ── */
+    .icon-svg { width: 1.25em; height: 1.25em; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .icon-svg.large { width: 2rem; height: 2rem; }
+
+    /* ── Responsive ── */
+    @media (max-width: 1024px) {
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+      .locations-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 768px) {
+      .nav-links, .nav-cta { display: none; }
+      .mobile-toggle { display: block; }
+      .hero h1 { font-size: 2.25rem; }
+      .about-grid { grid-template-columns: 1fr; }
+      .about-badge { display: none; }
+      .services-grid { grid-template-columns: 1fr; }
+      .locations-grid { grid-template-columns: repeat(2, 1fr); }
+      .contact-grid { grid-template-columns: repeat(2, 1fr); }
+      .section-title { font-size: 1.75rem; }
+    }
+    @media (max-width: 480px) {
+      .locations-grid { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .hero-buttons { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="container">
+      <a href="#home" class="navbar-brand">RPM<span>Home Management</span></a>
+      <div class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#services">Services</a>
+        <a href="#about">About</a>
+        <a href="#locations">Locations</a>
+        <a href="#careers">Careers</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div class="nav-cta">
+        <a href="tel:+10000000000" class="phone-link">📞 Call Us</a>
+        <a href="#contact" class="btn btn-primary">Get a Quote</a>
+      </div>
+      <button class="mobile-toggle" aria-label="Toggle menu" onclick="document.querySelector('.mobile-menu').style.display = document.querySelector('.mobile-menu').style.display === 'block' ? 'none' : 'block'">☰</button>
+    </div>
+  </nav>
+  <div class="mobile-menu" style="display:none; position:fixed; top:64px; left:0; right:0; z-index:49; background:var(--secondary); padding:1rem;">
+    <div class="container" style="display:flex; flex-direction:column; gap:0.75rem;">
+      <a href="#home" style="color:rgba(255,255,255,0.8); font-size:0.875rem; padding:0.5rem 0;" onclick="document.querySelector('.mobile-menu').style.display='none'">Home</a>
+      <a href="#services" style="color:rgba(255,255,255,0.8); font-size:0.875rem; padding:0.5rem 0;" onclick="document.querySelector('.mobile-menu').style.display='none'">Services</a>
+      <a href="#about" style="color:rgba(255,255,255,0.8); font-size:0.875rem; padding:0.5rem 0;" onclick="document.querySelector('.mobile-menu').style.display='none'">About</a>
+      <a href="#locations" style="color:rgba(255,255,255,0.8); font-size:0.875rem; padding:0.5rem 0;" onclick="document.querySelector('.mobile-menu').style.display='none'">Locations</a>
+      <a href="#careers" style="color:rgba(255,255,255,0.8); font-size:0.875rem; padding:0.5rem 0;" onclick="document.querySelector('.mobile-menu').style.display='none'">Careers</a>
+      <a href="#contact" style="color:rgba(255,255,255,0.8); font-size:0.875rem; padding:0.5rem 0;" onclick="document.querySelector('.mobile-menu').style.display='none'">Contact</a>
+      <a href="#contact" class="btn btn-primary" style="margin-top:0.5rem; justify-content:center;" onclick="document.querySelector('.mobile-menu').style.display='none'">Get a Quote</a>
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <section id="home" class="hero">
+    <div class="hero-bg">
+      <!-- Replace src with your own hero image -->
+      <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=1920&q=80" alt="Beautiful residential neighborhood in Dallas Texas" />
+      <div class="overlay"></div>
+    </div>
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span>🛡️ Trusted Property Management</span>
+        </div>
+        <h1>Your Property, <span class="highlight">Our Priority</span></h1>
+        <p class="desc">RPM Home Management delivers professional, reliable property management services across Texas. We protect your investment so you don't have to worry.</p>
+        <p class="availability">Available 24/7 — Always Accessible to Our Clients</p>
+        <div class="hero-buttons">
+          <a href="#contact" class="btn btn-primary btn-lg">Get Started Today →</a>
+          <a href="#services" class="btn btn-outline btn-lg">Our Services</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section id="services" class="section services">
+    <div class="container">
+      <div class="text-center">
+        <span class="section-label">What We Do</span>
+        <h2 class="section-title">Comprehensive Property Services</h2>
+        <p class="section-desc">From tenant placement to maintenance, we handle every aspect of property management so you can enjoy peace of mind.</p>
+      </div>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon">🏠</div>
+          <h3>Property Management</h3>
+          <p>Full-service management of residential properties including tenant relations, lease administration, and property oversight.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">🔧</div>
+          <h3>Maintenance &amp; Repairs</h3>
+          <p>24/7 maintenance coordination with trusted vendors to keep your property in top condition year-round.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">💲</div>
+          <h3>Rent Collection</h3>
+          <p>Timely and efficient rent collection with transparent financial reporting and owner disbursements.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">👥</div>
+          <h3>Tenant Screening</h3>
+          <p>Comprehensive background checks, credit reports, and rental history verification for quality tenants.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">📋</div>
+          <h3>Property Inspections</h3>
+          <p>Routine and move-in/move-out inspections with detailed reports and photo documentation.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">✅</div>
+          <h3>Legal Compliance</h3>
+          <p>Stay compliant with Texas property laws, fair housing regulations, and local ordinances.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="section about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-image">
+          <!-- Replace src with your own about image -->
+          <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=800&q=80" alt="RPM Home Management team inspecting a property" />
+          <div class="about-badge">
+            <p>10+</p>
+            <p>Years Experience</p>
+          </div>
+        </div>
+        <div class="about-text">
+          <span class="section-label">About Us</span>
+          <h2 class="section-title">Managing Properties, <span class="highlight">Building Trust</span></h2>
+          <p class="body">RPM Home Management is a full-service property management company headquartered in Dallas, Texas. We specialize in residential property management, providing homeowners and investors with the expertise and dedication needed to protect and grow their real estate investments.</p>
+          <p class="body">Our team of experienced professionals is committed to delivering exceptional service, maintaining open communication, and ensuring every property under our care meets the highest standards.</p>
+          <ul class="about-list">
+            <li><span class="check">✔</span> Licensed &amp; insured property management</li>
+            <li><span class="check">✔</span> Dedicated account managers for every client</li>
+            <li><span class="check">✔</span> Transparent pricing with no hidden fees</li>
+            <li><span class="check">✔</span> Proven track record across Texas</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Locations -->
+  <section id="locations" class="section locations">
+    <div class="container">
+      <div class="text-center">
+        <span class="section-label">Our Reach</span>
+        <h2 class="section-title">Serving Communities Across <span class="highlight">Texas</span></h2>
+        <p class="section-desc">Headquartered in Dallas with a strong presence throughout the Lone Star State.</p>
+      </div>
+      <div class="locations-grid">
+        <div class="location-card hq">
+          <span class="pin">📍</span>
+          <div><p class="name">Dallas</p><p class="hq-label">Headquarters</p></div>
+        </div>
+        <div class="location-card"><span class="pin">📍</span><div><p class="name">Houston</p></div></div>
+        <div class="location-card"><span class="pin">📍</span><div><p class="name">Austin</p></div></div>
+        <div class="location-card"><span class="pin">📍</span><div><p class="name">Fort Worth</p></div></div>
+        <div class="location-card"><span class="pin">📍</span><div><p class="name">San Antonio</p></div></div>
+        <div class="location-card"><span class="pin">📍</span><div><p class="name">Lubbock</p></div></div>
+        <div class="location-card"><span class="pin">📍</span><div><p class="name">El Paso</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Careers -->
+  <section id="careers" class="section careers">
+    <div class="container">
+      <div class="text-center" style="max-width:750px; margin:0 auto;">
+        <div class="careers-icon">💼</div>
+        <span class="section-label">Careers</span>
+        <h2 class="section-title">Join Our Team</h2>
+        <p class="section-desc">We're always looking for talented, motivated individuals who are passionate about property management and delivering exceptional service. Grow your career with RPM Home Management.</p>
+        <div style="margin-top:2rem;">
+          <!-- UPDATE THIS LINK to your actual application form URL -->
+          <a href="https://www.rpmhomemanagement.com/" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg">Apply Now →</a>
+        </div>
+        <p class="note">Click above to be directed to our online application form.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="section contact">
+    <div class="container">
+      <div class="text-center">
+        <span class="section-label">Get In Touch</span>
+        <h2 class="section-title" style="color:#fff;">Contact Us</h2>
+        <p class="section-desc">Ready to take the hassle out of property management? Reach out today.</p>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-card">
+          <div class="icon">📞</div>
+          <h3>Phone</h3>
+          <a href="tel:+1385-999-7953">(385) 999-7953</a>
+        </div>
+        <div class="contact-card">
+          <div class="icon">✉️</div>
+          <h3>Email</h3>
+          <a href="mailto:info@rpmhomemanagement.com">info@rpmhomemanagement.com</a>
+        </div>
+        <div class="contact-card">
+          <div class="icon">📍</div>
+          <h3>Location</h3>
+          <p>Dallas, Texas</p>
+        </div>
+        <div class="contact-card">
+          <div class="icon">🕐</div>
+          <h3>Availability</h3>
+          <p>24/7 Support</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p class="brand">RPM Home Management</p>
+      <p class="copy">&copy; 2025 RPM Home Management. All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
